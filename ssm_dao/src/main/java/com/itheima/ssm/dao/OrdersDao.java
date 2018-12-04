@@ -3,10 +3,7 @@ package com.itheima.ssm.dao;
 
 import com.itheima.ssm.domain.Orders;
 import com.itheima.ssm.domain.Product;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import javax.naming.spi.ResolveResult;
 import java.util.List;
@@ -35,10 +32,12 @@ public interface OrdersDao {
             @Result(property = "peopleCount", column = "peopleCount"),
             @Result(property = "orderDesc", column = "orderDesc"),
             //查询该订单的产品信息
-            @Result(property = "product", column = "productiId", one = @One(select="com.itheima.ssm.dao.productDao.findById")),
-            //查询
-            @Result()
+            @Result(property = "product", column = "productId", one = @One(select = "com.itheima.ssm.dao.ProductDao.findById")),
+            //查询会员/联系人信息
+            @Result(property = "member", column = "memberId", one = @One(select = "com.itheima.ssm.dao.MemberDao.findById")),
+            //查询游客信息
+            @Result(property = "travellers",column="id",many=@Many(select="com.itheima.ssm.dao.TravellerDao.findByOrderId"))
 
     })
-    Orders findById(Integer id);
+    Orders findById(String id);
 }

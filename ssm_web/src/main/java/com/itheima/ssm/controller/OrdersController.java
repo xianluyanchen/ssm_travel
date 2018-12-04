@@ -18,9 +18,12 @@ public class OrdersController {
     @Autowired
     private OrdersService ordersService;
 
-    public ModelAndView findById(Integer id) {
+    @RequestMapping("/findById")
+    public ModelAndView findById(String id) {
         ModelAndView mv = new ModelAndView();
-        Orders order = ordersService.findById(id);
+        Orders orders = ordersService.findById(id);
+        mv.addObject("orders", orders);
+        mv.setViewName("orders-show");
         return mv;
     }
 
