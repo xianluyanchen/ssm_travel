@@ -1,7 +1,6 @@
 package com.itheima.ssm.service;
 
 import com.itheima.ssm.domain.Product;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

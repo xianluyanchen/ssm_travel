@@ -16,11 +16,11 @@
   </listener>
   <!--配置spring-security-->
   <filter>
-    <filter-name>delegatingFilterProxy</filter-name>
+    <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>delegatingFilterProxy</filter-name>
+    <filter-name>springSecurityFilterChain</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
@@ -62,7 +62,7 @@
   </filter-mapping>
 <!--配置欢迎页面-->
   <welcome-file-list>
-    <welcome-file>main.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

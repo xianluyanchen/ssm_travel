@@ -1,6 +1,6 @@
 package com.itheima.ssm.domain;
 
-import javax.management.relation.Role;
+
 import java.util.List;
 
 public class UserInfo {
@@ -12,6 +12,20 @@ public class UserInfo {
     private Integer status;//状态 0 未开启   1 开启
     private String statusStr;
     private List<Role> roles;
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", status=" + status +
+                ", statusStr='" + statusStr + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -62,6 +76,14 @@ public class UserInfo {
     }
 
     public String getStatusStr() {
+        //状态 0 未开启   1 开启
+        if (status != null) {
+            if (status == 0) {
+                statusStr = "未开启";
+            } else if (status == 1) {
+                statusStr = "已开启";
+            }
+        }
         return statusStr;
     }
 
