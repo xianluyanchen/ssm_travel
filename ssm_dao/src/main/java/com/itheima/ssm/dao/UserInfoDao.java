@@ -34,6 +34,6 @@ public interface UserInfoDao {
     @Select("select * from users")
     public List<UserInfo> findAll();
 
-    @Insert("insert into users values(null,#{email},#{username},#{password},#{phoneNum},#{status})")
+    @Insert("insert into users(email,username,password,phoneNum,status) values(#{email},#{username},#{password},#{phoneNum},#{status})")
     void saveUserInfo(UserInfo userInfo);
 }

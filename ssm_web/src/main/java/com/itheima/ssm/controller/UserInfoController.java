@@ -18,8 +18,9 @@ public class UserInfoController {
 
 
     @RequestMapping("/save")
-    public void saveUserInfo(UserInfo userInfo) {
+    public String saveUserInfo(UserInfo userInfo) {
         userInfoService.saveUserInfo(userInfo);
+        return "redirect:/user/findAll";
     }
 
     /**

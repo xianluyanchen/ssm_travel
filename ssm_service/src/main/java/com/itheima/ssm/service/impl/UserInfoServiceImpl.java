@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoDao userInfoDao;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 添加用户
@@ -28,6 +31,9 @@ public class UserInfoServiceImpl implements UserInfoService {
      */
     @Override
     public void saveUserInfo(UserInfo userInfo) {
+        String password = userInfo.getPassword();
+        String encodePassword = bCryptPasswordEncoder.encode(password);
+        userInfo.setPassword(encodePassword);
         userInfoDao.saveUserInfo(userInfo);
     }
 
@@ -41,6 +47,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoList;
     }
 
+    /**
+     * 校验用户/认证权限
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = userInfoDao.findByUsername(username);
