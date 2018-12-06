@@ -16,6 +16,17 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+
+    @RequestMapping("/save")
+    public String save(Role role) {
+        roleService.save(role);
+        return "redirect:/role/findAll";
+    }
+
+    /**
+     * 插入角色信息/新增角色
+     * @return
+     */
     @RequestMapping("findAll")
     public ModelAndView findAll() {
         List<Role> roleList = roleService.findAll();
