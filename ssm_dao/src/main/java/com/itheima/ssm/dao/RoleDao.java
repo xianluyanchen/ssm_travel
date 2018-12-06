@@ -10,6 +10,11 @@ import java.util.List;
 
 public interface RoleDao {
 
+    /**
+     * 根据userID查询role的信息
+     * @param uid
+     * @return
+     */
     @Select("select * from role where id in (select roleId from user_role where userId = #{userId})")
     @Results(
             {@Result(id = true, column = "id", property = "id"),
@@ -19,5 +24,11 @@ public interface RoleDao {
             }
     )
     List<Role> findRoleByUserId(String uid);
+
+    /**
+     * 查询所有的role信息
+     */
+    @Select("select * from role")
+    public List<Role> findAll();
 
 }
