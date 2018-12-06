@@ -38,6 +38,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     /**
+     * t通过user的id查询user的信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo findById(String userId) {
+        UserInfo userInfo = userInfoDao.findById(userId);
+        return userInfo;
+    }
+
+    /**
      * 查询所有用户列表
      * @return
      */

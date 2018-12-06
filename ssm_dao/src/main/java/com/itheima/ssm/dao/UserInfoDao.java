@@ -34,6 +34,28 @@ public interface UserInfoDao {
     @Select("select * from users")
     public List<UserInfo> findAll();
 
+    /**
+     * baocun保存用户
+     * @param userInfo
+     */
     @Insert("insert into users(email,username,password,phoneNum,status) values(#{email},#{username},#{password},#{phoneNum},#{status})")
     void saveUserInfo(UserInfo userInfo);
+
+    /**
+     * 根据userId查询用户信息
+     *
+     * @param userId
+     * @return
+     */
+    @Select("select * from users where id = #{userId}")
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "phoneNum", column = "phoneNum"),
+            @Result(property = "status", column = "status"),
+            @Result(property = "roles",column="id",javaType = List.class,many = @Many(select="com.itheima.ssm.dao.RoleDao.findRoleByUserId"))
+    })
+    UserInfo findById(String userId);
 }
