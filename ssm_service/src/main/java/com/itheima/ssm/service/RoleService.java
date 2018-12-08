@@ -10,4 +10,8 @@ public interface RoleService {
     List<Role> findAll();
 
     void save(Role role);
+
+    void addPermissionToRole(String roleId, String[] permissionIds);
+
+    Role findById(String roleid);
 }

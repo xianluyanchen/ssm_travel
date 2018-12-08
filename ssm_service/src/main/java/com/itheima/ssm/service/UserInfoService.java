@@ -1,5 +1,6 @@
 package com.itheima.ssm.service;
 
+import com.itheima.ssm.dao.UserInfoDao;
 import com.itheima.ssm.domain.UserInfo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -26,4 +27,16 @@ public interface UserInfoService extends UserDetailsService {
      * @return
      */
     UserInfo findById(String userId);
+
+    /**
+     * 查询用户不具备的所有角色
+     * @param userId
+     * @return
+     */
+    UserInfo findUserByIdAndAllRole(String userId);
+
+    /**
+     * 给用户添加角色
+     */
+    void addRoleToUser(String userId,String[] roleIds);
 }

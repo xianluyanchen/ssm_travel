@@ -17,9 +17,27 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @RequestMapping("/addRoleToUser")
+    public String addRoleToUser(@RequestParam(name="userId",required = true) String userId,@RequestParam(name="ids",required = true) String[] roleIds) {
+        userInfoService.addRoleToUser(userId, roleIds);
+        return "redirect:/user/findAll";
+    }
+
+    @RequestMapping("/findUserByIdAndAllRole")
+    public ModelAndView findUserByIdAndAllRole(@RequestParam(name="id",required = true) String userId) {
+        System.out.println(userId);
+        UserInfo userInfoList = userInfoService.findUserByIdAndAllRole(userId);
+        System.out.println(userInfoList);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("user",userInfoList);
+        mv.setViewName("user-role-add");
+        return mv;
+    }
+
 
     @RequestMapping("/findById")
-    public ModelAndView findById(@RequestParam(name="id",required = true) String userId) {
+    public ModelAndView findById(@RequestParam(name = "id", required = true) String userId) {
+
         ModelAndView mv = new ModelAndView();
         UserInfo userInfo = userInfoService.findById(userId);
         mv.addObject("user", userInfo);

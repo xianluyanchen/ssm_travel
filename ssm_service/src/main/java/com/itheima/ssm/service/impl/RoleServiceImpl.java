@@ -22,6 +22,21 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Role findById(String roleid) {
+        return roleDao.findById(roleid);
+
+    }
+
+    @Override
+    public void addPermissionToRole(String roleId, String[] permissionIds) {
+        for (int i = 0; i < permissionIds.length; i++) {
+
+            roleDao.addPermissionToRole(roleId,permissionIds[i]);
+
+        }
+    }
+
+    @Override
     public List<Role> findAll() {
         List<Role> roleList = roleDao.findAll();
         return roleList;

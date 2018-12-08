@@ -16,6 +16,12 @@ public class PermissionServiceImpl implements PermissionService {
 
 
     @Override
+    public List<Permission> findOtherPermission(String roleid) {
+        List<Permission> permissionList = permissionDao.findOtherPermission(roleid);
+        return permissionList;
+    }
+
+    @Override
     public void save(Permission permission) {
         permissionDao.save(permission);
 

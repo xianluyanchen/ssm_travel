@@ -27,6 +27,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 添加用户
+     *
      * @param userInfo
      */
     @Override
@@ -38,7 +39,37 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     /**
+     * 给用户添加角色信息
+     *
+     * @param userId
+     */
+    @Override
+    public void addRoleToUser(String userId, String[] roleIds) {
+        if (roleIds != null) {
+            for (int i = 0; i < roleIds.length; i++) {
+
+                userInfoDao.addRoleToUser(userId, roleIds[i]);
+            }
+        }
+
+
+    }
+
+    /**
+     * cha查找用户不具备的角色
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo findUserByIdAndAllRole(String userId) {
+        UserInfo userByIdAndAllRole = userInfoDao.findUserByIdAndAllRole(userId);
+        return userByIdAndAllRole;
+    }
+
+    /**
      * t通过user的id查询user的信息
+     *
      * @param userId
      * @return
      */
@@ -50,6 +81,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 查询所有用户列表
+     *
      * @return
      */
     @Override
@@ -60,6 +92,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 校验用户/认证权限
+     *
      * @param username
      * @return
      * @throws UsernameNotFoundException
@@ -79,7 +112,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     private List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authoritys = new ArrayList<>();
         for (Role role : roles) {
-            authoritys.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
+            authoritys.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
         return authoritys;
 

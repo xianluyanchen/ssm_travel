@@ -9,4 +9,5 @@ public interface PermissionService {
 
     void save(Permission permission);
 
+    List<Permission> findOtherPermission(String roleid);
 }
